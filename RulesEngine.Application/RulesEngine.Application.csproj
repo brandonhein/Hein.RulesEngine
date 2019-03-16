@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Hein.RulesEngine.Application</AssemblyName>
+    <RootNamespace>Hein.RulesEngine.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RulesEngine.Domain\RulesEngine.Domain.csproj" />
+    <ProjectReference Include="..\RulesEngine.Framework\RulesEngine.Framework.csproj" />
+  </ItemGroup>
+
+</Project>
