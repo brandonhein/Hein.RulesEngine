@@ -14,16 +14,18 @@ namespace Hein.RulesEngine.Domain
     {
         Smallest,
         Largest,
-        IsNull
+        IsNull,
+        AddProp,
     }
 
     public static class RuleFunction
     {
         private static Dictionary<FunctionType, Function> _functionPairs = new Dictionary<FunctionType, Function>()
         {
-            { FunctionType.Smallest, new Function()  { Type = FunctionType.Smallest,  Format = "Smallest({items})", Description = "Returns the smallest item of a list" } },
-            { FunctionType.Largest,  new Function()  { Type = FunctionType.Largest,   Format = "Largest({items})",  Description = "Returns the largest item of a list" } },
-            { FunctionType.IsNull,   new Function()  { Type = FunctionType.IsNull,    Format = "IsNull({item})",    Description = "Returns true/false if an item is null or empty"} }
+            { FunctionType.Smallest, new Function()  { Type = FunctionType.Smallest,  Format = "Smallest({items})",            Description = "Returns the smallest item of a list" } },
+            { FunctionType.Largest,  new Function()  { Type = FunctionType.Largest,   Format = "Largest({items})",             Description = "Returns the largest item of a list" } },
+            { FunctionType.IsNull,   new Function()  { Type = FunctionType.IsNull,    Format = "IsNull({item})",               Description = "Returns true/false if an item is null or empty"} },
+            { FunctionType.AddProp,  new Function()  { Type = FunctionType.AddProp,   Format = "Add({propertyName}, {type})",  Description = "Creates new temp property" } }
         };
 
         public static Dictionary<FunctionType, Function> GetAll()

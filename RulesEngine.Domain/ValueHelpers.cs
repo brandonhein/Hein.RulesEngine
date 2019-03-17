@@ -15,7 +15,9 @@ namespace Hein.RulesEngine.Domain
         IsOneOf,
         IsNull,
         IsNotNull,
-        Contains
+        Contains,
+        ToLower,
+        ToUpper,
     }
 
     public static class RuleHelper
@@ -25,7 +27,9 @@ namespace Hein.RulesEngine.Domain
             { ValueHelperType.IsOneOf,   new ValueHelper()  { Type = ValueHelperType.IsOneOf,   Format = "{item}.IsOneOf({items})",    Description = "Returns true/false if an item is one of items in a list" } },
             { ValueHelperType.IsNull,    new ValueHelper()  { Type = ValueHelperType.IsNull,    Format = "{item}.IsNull()",            Description = "Returns true/false if an item is null or empty"} },
             { ValueHelperType.IsNotNull, new ValueHelper()  { Type = ValueHelperType.IsNotNull, Format = "{item}.IsNotNull()",         Description = "Returns true/false if an item is not null or empty"} },
-            { ValueHelperType.Contains,  new ValueHelper()  { Type = ValueHelperType.Contains,  Format = "{item}.Contains({lookup}})", Description = "Returns true/false if an item contains a string squence" } }
+            { ValueHelperType.Contains,  new ValueHelper()  { Type = ValueHelperType.Contains,  Format = "{item}.Contains({lookup}})", Description = "Returns true/false if an item contains a string squence" } },
+            { ValueHelperType.ToLower,   new ValueHelper()  { Type = ValueHelperType.ToLower,   Format = "{item}.ToLower()",           Description = "Returns an all lower case of an item" } },
+            { ValueHelperType.ToUpper,   new ValueHelper()  { Type = ValueHelperType.ToUpper,   Format = "{item}.ToUpper()",           Description = "Returns an all upper case of an item" } }
         };
 
         public static Dictionary<ValueHelperType, ValueHelper> GetAll()
