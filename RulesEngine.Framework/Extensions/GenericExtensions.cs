@@ -21,5 +21,10 @@ namespace Hein.RulesEngine.Framework.Extensions
 
             return exists;
         }
+
+        public static bool IsOneOf(this int number, params int[] values)
+        {
+            return IsOneOf<int>(number, values);
+        }
     }
 }

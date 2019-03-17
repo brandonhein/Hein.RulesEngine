@@ -1,9 +1,12 @@
 ﻿using Hein.RulesEngine.Domain;
 using Hein.RulesEngine.Domain.Models;
 using Hein.RulesEngine.Framework.Extensions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Hein.RulesEngine.Application.Engine
 {
@@ -38,24 +41,21 @@ namespace Hein.RulesEngine.Application.Engine
             bool passed = false;
             if (!string.IsNullOrEmpty(rule.Condition))
             {
-                rule.Condition = rule.Condition.Replace("'", "\"");
-
-                foreach (var parameter in _parameters)
+                var condition = rule.Condition.ConvertValueHelpers();
+                condition = condition.ReplaceValuesWithParameters(_properites, _parameters);
+                //var options = ScriptOptions.Default.AddReferences(typeof(GenericExtensions).Assembly);
+                try
                 {
-                    var property = _properites.FirstOrDefault(x => x.Name == parameter.Key);
-                    if (property.Type.IsOneOf("String", "string"))
-                    {
-                        rule.Condition = rule.Condition.Replace($"#{parameter.Key}#", $"\"{parameter.Value}\"");
-                    }
-                    else
-                    {
-                        rule.Condition = rule.Condition.Replace($"#{parameter.Key}#", $"{parameter.Value}");
-                    }
+                    passed = CSharpScript.EvaluateAsync<bool>(condition)
+                        .Result;
                 }
-
-                passed = CSharpScript.EvaluateAsync<bool>(rule.Condition).Result;
+                catch
+                {
+                    passed = false;
+                }
             }
 
+            //set results with default values of entity properties
             foreach (var property in _properites)
             {
                 var parameter = _parameters.FirstOrDefault(x => x.Key == property.Name);
@@ -73,6 +73,8 @@ namespace Hein.RulesEngine.Application.Engine
             {
                 if (!string.IsNullOrEmpty(rule.Actions))
                 {
+                    rule.Actions = rule.Actions.ReplaceValuesWithParameters(_properites, result);
+
                     var actionSteps = rule.Actions.Trim().Split(";");
                     foreach (var step in actionSteps)
                     {
@@ -83,7 +85,7 @@ namespace Hein.RulesEngine.Application.Engine
 
                             var resultItem = result.FirstOrDefault(x => x.Key == propName);
                             var property = _properites.FirstOrDefault(x => x.Name == propName);
-                            if (!resultItem.IsNullOrEmpty())
+                            if (!resultItem.IsNullOrEmpty() || (property != null && property.Required))
                             {
                                 var value = Converter.ChangeType(RuleType.GetType(property.Type), valueToSet);
 
