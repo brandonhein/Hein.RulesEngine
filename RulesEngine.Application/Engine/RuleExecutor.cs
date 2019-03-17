@@ -4,6 +4,7 @@ using Hein.RulesEngine.Framework.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -41,15 +42,17 @@ namespace Hein.RulesEngine.Application.Engine
             bool passed = false;
             if (!string.IsNullOrEmpty(rule.Condition))
             {
-                var condition = rule.Condition.ConvertValueHelpers();
-                condition = condition.ReplaceValuesWithParameters(_properites, _parameters);
-                //var options = ScriptOptions.Default.AddReferences(typeof(GenericExtensions).Assembly);
+                var condition = rule.Condition.ReplaceValuesWithParameters(_properites, _parameters);
+                var options = ScriptOptions.Default.AddReferences(typeof(GenericExtensions).Assembly);
+
+                //var r = 3005.IsOneOf(3005, 3010);
+
                 try
                 {
-                    passed = CSharpScript.EvaluateAsync<bool>(condition)
+                    passed = CSharpScript.EvaluateAsync<bool>(condition)//, options)
                         .Result;
                 }
-                catch
+                catch (Exception ex)
                 {
                     passed = false;
                 }

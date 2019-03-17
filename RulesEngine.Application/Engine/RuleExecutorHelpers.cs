@@ -19,6 +19,10 @@ namespace Hein.RulesEngine.Application.Engine
                 {
                     item = item.Replace($"#{parameter.Key}#", $"\"{parameter.Value}\"");
                 }
+                else if (property.Type.IsOneOf("Bool", "bool", "Boolean", "boolean"))
+                {
+                    item = item.Replace($"#{parameter.Key}#", $"{parameter.Value.ToString().ToLower()}");
+                }
                 else
                 {
                     item = item.Replace($"#{parameter.Key}#", $"{parameter.Value}");
