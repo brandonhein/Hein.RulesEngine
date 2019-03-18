@@ -43,13 +43,15 @@ namespace Hein.RulesEngine.Application.Engine
             if (!string.IsNullOrEmpty(rule.Condition))
             {
                 var condition = rule.Condition.ReplaceValuesWithParameters(_properites, _parameters);
-                var options = ScriptOptions.Default.AddReferences(typeof(GenericExtensions).Assembly);
+                var options = ScriptOptions.Default
+                    .AddReferences(typeof(GenericExtensions).Assembly)
+                    .WithImports("Hein.RulesEngine.Framework.Extensions");
 
                 //var r = 3005.IsOneOf(3005, 3010);
 
                 try
                 {
-                    passed = CSharpScript.EvaluateAsync<bool>(condition)//, options)
+                    passed = CSharpScript.EvaluateAsync<bool>(condition, options)
                         .Result;
                 }
                 catch (Exception ex)

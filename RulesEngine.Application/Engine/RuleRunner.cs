@@ -25,6 +25,7 @@ namespace Hein.RulesEngine.Application.Engine
             if (defaultRule != null)
             {
                 defaultRule.Priority = int.MaxValue;
+                defaultRule.Condition = "true";
                 rules.Add(def.Default);
             }
 

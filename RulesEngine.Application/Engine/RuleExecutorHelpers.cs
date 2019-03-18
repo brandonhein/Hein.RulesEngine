@@ -15,17 +15,20 @@ namespace Hein.RulesEngine.Application.Engine
             foreach (var parameter in parameters)
             {
                 var property = properties.FirstOrDefault(x => x.Name == parameter.Key);
-                if (property.Type.IsOneOf("String", "string"))
+                if (property != null)
                 {
-                    item = item.Replace($"#{parameter.Key}#", $"\"{parameter.Value}\"");
-                }
-                else if (property.Type.IsOneOf("Bool", "bool", "Boolean", "boolean"))
-                {
-                    item = item.Replace($"#{parameter.Key}#", $"{parameter.Value.ToString().ToLower()}");
-                }
-                else
-                {
-                    item = item.Replace($"#{parameter.Key}#", $"{parameter.Value}");
+                    if (property.Type.IsOneOf("String", "string"))
+                    {
+                        item = item.Replace($"#{parameter.Key}#", $"\"{parameter.Value}\"");
+                    }
+                    else if (property.Type.IsOneOf("Bool", "bool", "Boolean", "boolean"))
+                    {
+                        item = item.Replace($"#{parameter.Key}#", $"{parameter.Value.ToString().ToLower()}");
+                    }
+                    else
+                    {
+                        item = item.Replace($"#{parameter.Key}#", $"{parameter.Value}");
+                    }
                 }
             }
 

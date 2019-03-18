@@ -1,4 +1,6 @@
-﻿namespace Hein.RulesEngine.Framework.Extensions
+﻿using System;
+
+namespace Hein.RulesEngine.Framework.Extensions
 {
     public static class StringExtensions
     {
@@ -27,6 +29,22 @@
             {
                 return "";
             }
+        }
+
+        public static bool IsOneOf(this string val, params string[] comparisonValue)
+        {
+            if (!string.IsNullOrEmpty(val))
+            {
+                foreach (var s in comparisonValue)
+                {
+                    if (!string.IsNullOrEmpty(s) &&
+                        s.Equals(val, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
