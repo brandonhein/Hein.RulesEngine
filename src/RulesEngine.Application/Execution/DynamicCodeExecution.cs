@@ -31,9 +31,11 @@ namespace Hein.RulesEngine.Application.Execution
         public static async Task<T> ExecuteAsync<T>(this string cSharpCode)
         {
             var assemblies = ScriptOptions.Default;
+            //WithImports = "using System.Math" at the top of the script
             assemblies = assemblies.WithImports(
                 "System.Math",
                 "Hein.Framework.Extensions");
+            //WithReferences = pulling in actual .dlls outside of System
             assemblies = assemblies.WithReferences(
                 typeof(Hein.Framework.Extensions.GenericExtensions).Assembly);
 
