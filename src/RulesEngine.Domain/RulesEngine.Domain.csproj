@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Hein.RulesEngine.Application</AssemblyName>
-    <RootNamespace>Hein.RulesEngine.Application</RootNamespace>
+    <AssemblyName>Hein.RulesEngine.Domain</AssemblyName>
+    <RootNamespace>Hein.RulesEngine.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RulesEngine.Framework\RulesEngine.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

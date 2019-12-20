@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using System;
 using System.Threading.Tasks;
 
-namespace Hein.RulesEngine.Application.Execution
+namespace Hein.RulesEngine.Domain.Magic
 {
     public static class DynamicCodeExecution
     {

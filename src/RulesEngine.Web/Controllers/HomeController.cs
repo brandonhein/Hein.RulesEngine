@@ -6,12 +6,12 @@ namespace Hein.RulesEngine.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
-            var code = "\"3005\".IsOneOf(\"3005\",\"3010\")";
+            var code = string.Format("\"{0}\".IsOneOf(\"3005\",\"3010\")", id);
             var result = code.Execute<bool>();
 
-            var extResult = "3005".IsOneOf("3005", "3010");
+            var extResult = id.IsOneOf("3005", "3010");
 
             return Ok(result);
         }

@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RulesEngine.Web", "src\RulesEngine.Web\RulesEngine.Web.csproj", "{6C900577-807B-4C0B-9BD4-043C45AB0FEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RulesEngine.Framework", "src\RulesEngine.Framework\RulesEngine.Framework.csproj", "{E2830CD6-F1AA-47B0-8DFA-3EB42545D88A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RulesEngine.Framework", "src\RulesEngine.Framework\RulesEngine.Framework.csproj", "{E2830CD6-F1AA-47B0-8DFA-3EB42545D88A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RulesEngine.Application", "src\RulesEngine.Application\RulesEngine.Application.csproj", "{AF797FF7-F39F-4B2E-BB53-E080287199D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RulesEngine.Application", "src\RulesEngine.Application\RulesEngine.Application.csproj", "{AF797FF7-F39F-4B2E-BB53-E080287199D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RulesEngine.Tests", "src\RulesEngine.Tests\RulesEngine.Tests.csproj", "{97757932-9C04-4178-B490-0EBA1674E549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RulesEngine.Tests", "src\RulesEngine.Tests\RulesEngine.Tests.csproj", "{97757932-9C04-4178-B490-0EBA1674E549}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RulesEngine.Domain", "src\RulesEngine.Domain\RulesEngine.Domain.csproj", "{2224C2AE-3F15-4493-B724-48B4ED391265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{97757932-9C04-4178-B490-0EBA1674E549}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97757932-9C04-4178-B490-0EBA1674E549}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97757932-9C04-4178-B490-0EBA1674E549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2224C2AE-3F15-4493-B724-48B4ED391265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2224C2AE-3F15-4493-B724-48B4ED391265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2224C2AE-3F15-4493-B724-48B4ED391265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2224C2AE-3F15-4493-B724-48B4ED391265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
