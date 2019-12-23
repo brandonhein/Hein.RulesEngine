@@ -17,7 +17,7 @@ namespace Hein.RulesEngine.Domain.Magic.CodeGen
                     isOneOfParam = $"{isOneOfParam} \"{compare}\",";
                 }
 
-                isOneOfParam = isOneOfParam.TrimEnd(',');
+                isOneOfParam = isOneOfParam.TrimEnd(',').Trim();
 
                 return $" \"{parameter}\".IsOneOf({isOneOfParam}) ";
             }

@@ -16,25 +16,60 @@ namespace Hein.RulesEngine.Tests.Web.Controllers
         {
             var sampleDefinition = new RuleDefinition()
             {
-                Name = "event_id_is_status",
+                Name = "next_status_update",
                 Properties = new List<EntityProperty>()
                 {
                     new EntityProperty() { Name = "EventId", Type = "integer" },
+                    new EntityProperty() { Name = "StatusId", Type = "integer" },
+                    new EntityProperty() { Name = "IsCallEvent", Type = "boolean" },
+                    new EntityProperty() { Name = "CallDuration", Type = "decimal" }
                 },
                 Rules = new List<Rule>()
                 {
                     new Rule()
                     {
                         IsEnabled = true,
-                        Name = "fresh_status",
+                        Name = "set_event_to_status",
                         Priority = 1,
                         Conditions = new List<RuleParameters>()
                         {
-                            new RuleParameters() { Property = "EventId", Operator = "IsOneOf", Value = "3005,3010" }
+                            new RuleParameters() { Property = "EventId", Operator = "IsOneOf", Value = "1010,1020,1021,1100,1110,3020,3021,3025" }
                         },
                         Results = new List<EntityPropertyResult>()
                         {
-                            new EntityPropertyResult() { Name = "IsStatus", Value = "true", Type = "boolean" }
+                            new EntityPropertyResult() { Name = "StatusId", Value = "EventId", Type = "copy" }
+                        }
+                    },
+                    new Rule()
+                    {
+                        IsEnabled = true,
+                        Priority = 2,
+                        Name = "incoming_call_not_long_enough_for_convo",
+                        Conditions = new List<RuleParameters>()
+                        {
+                            new RuleParameters() { Property = "StatusId", Operator = "IsOneOf", Value ="3005,3010" },
+                            new RuleParameters() { Property = "IsCallEvent", Operator = "==", Value = "true" },
+                            new RuleParameters() { Property = "CallDuration", Operator = "<", Value = "127" }
+                        },
+                        Results = new List<EntityPropertyResult>()
+                        {
+                            new EntityPropertyResult() { Name = "StatusId", Value = "3010", Type = "integer" }
+                        }
+                    },
+                    new Rule()
+                    {
+                        IsEnabled = true,
+                        Priority = 3,
+                        Name = "incoming_call_long_enough_for_convo",
+                        Conditions = new List<RuleParameters>()
+                        {
+                            new RuleParameters() { Property = "StatusId", Operator = "IsOneOf", Value ="3005,3010" },
+                            new RuleParameters() { Property = "IsCallEvent", Operator = "==", Value = "true" },
+                            new RuleParameters() { Property = "CallDuration", Operator = ">=", Value = "127" }
+                        },
+                        Results = new List<EntityPropertyResult>()
+                        {
+                            new EntityPropertyResult() { Name = "StatusId", Value = "3015", Type = "integer" }
                         }
                     }
                 }
@@ -52,10 +87,11 @@ namespace Hein.RulesEngine.Tests.Web.Controllers
 
             var result = controller.Post(new RuleRequest()
             {
-                Rule = "event_id_is_status",
+                Rule = "next_status_update",
                 Parameters = new Dictionary<string, string>()
                 {
-                    { "EventId", "3005" }
+                    { "EventId", "3020" },
+                    { "StatusId", "3005" }
                 }
             }).Result;
         }

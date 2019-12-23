@@ -1,8 +1,8 @@
 ﻿using Hein.RulesEngine.Domain.Magic;
 using Hein.RulesEngine.Domain.Models;
 using Hein.RulesEngine.Framework.Extensions;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hein.RulesEngine.Application
 {
@@ -29,7 +29,7 @@ namespace Hein.RulesEngine.Application
                 var code = DynamicCode.Build(_properties, rule.Conditions, _parameters);
                 tracker.Passed = code.Execute<bool>();
             }
-            catch (Exception ex)
+            catch
             {
                 tracker.Passed = false;
             }
@@ -49,7 +49,16 @@ namespace Hein.RulesEngine.Application
                         results.Remove(property.Name);
                     }
 
-                    results.Add(property.Name, property.Value.ToType(property.Type));
+                    //copy a parameter value and set to result value
+                    if (property.Type.ToLower() == "copy")
+                    {
+                        var parameterValue = _parameters.FirstOrDefault(x => x.Key == property.Value.ToString()).Value;
+                        results.Add(property.Name, parameterValue);
+                    }
+                    else
+                    {
+                        results.Add(property.Name, property.Value.ToType(property.Type));
+                    }
                 }
             }
 
