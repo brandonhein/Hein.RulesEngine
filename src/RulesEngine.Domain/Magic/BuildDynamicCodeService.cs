@@ -8,7 +8,7 @@ namespace Hein.RulesEngine.Domain.Magic
 {
     public static class DynamicCode
     {
-        public static string Build(IEnumerable<EntityProperty> properties, IEnumerable<RuleParameters> conditions, Dictionary<string, object> parameters)
+        public static string Build(IEnumerable<EntityProperty> properties, IEnumerable<RuleParameters> conditions, Dictionary<string, string> parameters)
         {
             var result = string.Empty;
 
@@ -29,10 +29,11 @@ namespace Hein.RulesEngine.Domain.Magic
 
             //get rid of the last " && "
             result = result.Trim();
+            result = result.TrimStart('&');
             result = result.TrimEnd('&');
             result = result.Trim();
 
-            RulesEngineLogger.Debug("Condition Code Generated: " + result);
+            //RulesEngineLogger.Debug("Condition Code Generated: " + result);
             return result;
         }
     }

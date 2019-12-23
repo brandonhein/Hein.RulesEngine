@@ -9,10 +9,13 @@ namespace Hein.RulesEngine.Framework.Extensions
     {
         public static object ToType(this object obj, string toType)
         {
-            switch (toType)
+            switch (toType.ToLower())
             {
                 case "string":
                     return obj.ToType<string>();
+                case "bool":
+                case "boolean":
+                    return obj.ToString().ToLower().ToType<bool>();
             }
 
             return null;

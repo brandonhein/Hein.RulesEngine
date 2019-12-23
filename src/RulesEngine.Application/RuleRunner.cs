@@ -24,12 +24,12 @@ namespace Hein.RulesEngine.Application
             var definition = await _repository.GetDefinitionByNameAsync(request.Rule);
             var rules = definition.Rules?.OrderBy(x => x.Priority);
 
-            if (rules == null || rules.Any())
+            if (rules == null || !rules.Any())
             {
                 return new RuleResponse()
                 {
                     Rule = request.Rule,
-                    Winner = "no_rule_found",
+                    RuleId = "no_rule_found",
                     Values = null
                 };
             }
@@ -59,7 +59,7 @@ namespace Hein.RulesEngine.Application
                 return new RuleResponse()
                 {
                     Rule = request.Rule,
-                    Winner = passedRule.Name,
+                    RuleId = passedRule.Name,
                     Values = passedRule.Results
                 };
             }
@@ -68,7 +68,7 @@ namespace Hein.RulesEngine.Application
                 return new RuleResponse()
                 {
                     Rule = request.Rule,
-                    Winner = "no_successful_rule",
+                    RuleId = "no_successful_rule",
                     Values = null
                 };
             }
