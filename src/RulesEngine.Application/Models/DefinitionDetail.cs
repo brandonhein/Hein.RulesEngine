@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hein.RulesEngine.Application.Models
 {
@@ -8,6 +6,5 @@ namespace Hein.RulesEngine.Application.Models
     {
         public Guid DefinitionId { get; set; }
         public string Name { get; set; }
-        public 
     }
 }

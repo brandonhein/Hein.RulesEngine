@@ -10,6 +10,7 @@ namespace Hein.RulesEngine.Domain.Models
         public bool IsEnabled { get; set; }
         public decimal Priority { get; set; }
         public List<RuleParameters> Conditions { get; set; }
+        public List<EntityPropertyResult> Results { get; set; }
 
         public List<History> ChangeHistory { get; set; }
     }

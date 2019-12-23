@@ -1,4 +1,6 @@
+using Amazon;
 using Hein.Framework.DependencyInjection;
+using Hein.Framework.Dynamo;
 using Hein.RulesEngine.Framework.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +49,9 @@ namespace Hein.RulesEngine.Web
                 EnabledLevels = new string[] { "Debug", "Info", "Warn", "Error" }
             };
             services.AddSingleton<ILogProvider>(s => new ConsoleLogProvider(logConfig));
+
+
+            services.AddTransient<IRepositoryContext>(s => new RepositoryContext(RegionEndpoint.USEast2));
 
             services.BuildServiceLocator();
         }
