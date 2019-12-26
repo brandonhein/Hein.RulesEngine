@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Hein.RulesEngine.Framework</AssemblyName>
+    <RootNamespace>Hein.RulesEngine.Framework</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hein.Framework.DependencyInjection" Version="1.0.0" />
+    <PackageReference Include="Hein.Framework.Dynamo" Version="1.0.1" />
+    <PackageReference Include="Hein.Framework.Extensions" Version="1.0.0" />
+    <PackageReference Include="Hein.Framework.Http" Version="1.0.1" />
+    <PackageReference Include="Hein.Framework.Serialization" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>
