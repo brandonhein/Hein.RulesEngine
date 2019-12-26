@@ -1,6 +1,14 @@
 # Hein.RulesEngine
 Version 1 of Hein.RulesEngine
 
+#### How does it work?
+This Rules Engine leverages DynamoDB to save rule definitions and rules assoicated to those definitions.  An application that wants to apply rules to an object will create a `RuleRequest` json payload... do an HTTP POST to the Execute endpoint... the rules engine will take the Ruleset name (it's part of the payload)... grab all enabled rules from the definition/set... run thru them all... and respond back with the highest passing rule.
+
+There's an admin site/screen that allows adminstrators to update rules by doing the following:  
+1. Define entity/payload parameters
+2. Create conditional statements from payload parameters  
+3. And add resulting properties when all condition statements at met.
+
 Hierarchy
 1. Rule Definition  
 a. Properties (Entity Definition)  
